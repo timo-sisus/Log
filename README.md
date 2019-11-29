@@ -6,7 +6,7 @@ Utility class that enables quickly and easily logging variable values to the con
 ```C#
 float floatVariable = 3f;
 
-Log.Value(()=>fieldName);
+Log.Value(()=>floatVariable);
 
 // console output:
 // "floatVariable=3"
