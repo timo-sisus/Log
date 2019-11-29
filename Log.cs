@@ -130,7 +130,7 @@ public static class Log
 				}
 			}
 
-			if(!flags.HasFlag(BindingFlags.DeclaredOnly))
+			if((flags & BindingFlags.DeclaredOnly) == 0)
 			{
 				break;
 			}
@@ -161,7 +161,7 @@ public static class Log
 	{
 		sb.Append(property.Name);
 		sb.Append(NameValueSeparator);
-		var value = property.GetValue(fieldOwner);
+		var value = property.GetValue(fieldOwner, null);
 		ToString(value, sb);
 	}
 
@@ -325,7 +325,7 @@ public static class Log
 				var methodCallExpression = (MethodCallExpression)expression;
 				method = methodCallExpression.Method;
 
-				Debug.Log("Method "+method.Name);
+				Debug.Log("Method " + method.Name);
 
 				if(method == null)
 				{
@@ -341,7 +341,7 @@ public static class Log
 
 				return method.Invoke(methodCallExpression.Object, null);
 			default:
-				Debug.LogError("Validate provided argument was not a constant, MemberAccess or Call: "+ expression.NodeType);
+				Debug.LogError("Validate provided argument was not a constant, MemberAccess or Call: " + expression.NodeType);
 				return null;
 		}
 	}
