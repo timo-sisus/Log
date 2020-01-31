@@ -306,9 +306,6 @@ public static class Log
 				Debug.LogError("Validate.Arguments given argument was of type MemberAccess but was not a field, property or method.");
 				return null;
 			case ExpressionType.Lambda:
-
-				Debug.Log("Lambda");
-
 				var lambdaExpression = (LambdaExpression)expression;
 				var compiled = lambdaExpression.Compile();
 				return compiled.DynamicInvoke(null);
@@ -316,17 +313,12 @@ public static class Log
 				lambdaExpression = expression as LambdaExpression;
 				if(lambdaExpression != null)
 				{
-					Debug.Log("Lambda");
-
 					compiled = lambdaExpression.Compile();
 					return compiled.DynamicInvoke(null);
 				}
 
 				var methodCallExpression = (MethodCallExpression)expression;
 				method = methodCallExpression.Method;
-
-				Debug.Log("Method " + method.Name);
-
 				if(method == null)
 				{
 					Debug.LogError("Validate given argument was of type Call but MethodInfo was null.");
